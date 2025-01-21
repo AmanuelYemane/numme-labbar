@@ -1,0 +1,47 @@
+clear all
+
+load STHLMTEMP
+
+y = Tdm;
+k = 2*pi/365;
+
+n = length(y);
+t = (1:n)';
+
+A = [ones(n, 1), sin(k*t), cos(k*t), sin(2*k*t), cos(2*k*t)];
+
+c = A\y;
+
+T_anp = A * c;
+
+% Skillnad mellan datapunkter och förutsagda temperaturer
+residuals = Tdm - T_anp;
+% Kvadrera 
+least_squares_sum = sum(residuals.^2);
+
+% Extrahera modellparametrar
+c0 = c(1);
+c1 = c(2);
+c2 = c(3);
+c3 = c(4);
+c4 = c(5);
+
+
+figure;
+plot(t, y, '.', 'LineWidth', 2); % Plot the model in red
+hold on;
+plot(t, T_anp, 'b', 'LineWidth', 2);   % Plot the data points in blue
+legend ('Uppmätta temperaturer', 'Anpassad modell', 'Location', 'Best')
+xlabel ('Tid (dagar)')
+ylabel ('Temperatur (grader)')
+grid on;
+
+% Plotta residualerna
+subplot(2, 1, 2);
+plot(t, residuals, 'k-', 'LineWidth', 1.5);
+xlabel('Tid (dagar)');
+ylabel('Residual (grader)');
+title('Residualer: Tdm - Tmod');
+grid on;
+
+
