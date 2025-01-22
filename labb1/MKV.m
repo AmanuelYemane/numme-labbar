@@ -43,7 +43,7 @@ grid on;
 
 % Plot residual
 subplot(2, 1, 2);
-plot(t, residuals, 'k-', 'LineWidth', 1.5);
+plot(t, residuals, '.', 'LineWidth', 1.5);
 xlabel('Tid (dagar)');
 ylabel('Residual (grader)');
 title('Residualer: Tdm - Tmod');
