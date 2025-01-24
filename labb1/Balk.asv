@@ -1,0 +1,7 @@
+clear all
+
+H = 0.5;
+min_error = 10.^-8;
+i = 0;
+error =;
+While (error>min)
