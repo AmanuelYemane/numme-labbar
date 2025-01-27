@@ -18,14 +18,12 @@ J = {
 
 % Startgissningar
 X = {
-    [200;1000];
-    [1000;1000];
-    [1000;1000]
+    [170;1000]; % P1
+    [400;2450]; % P2
+    [800;1750] % P3
     };
 
-
-% P1
-tol = 1e-5; hnorm = 1; iter = 0; maxiter = 20;
+tol = 1e-8; hnorm = 1; iter = 0; maxiter = 20;
 
 for i=1:3
     hnorm = 1; iter = 0;
@@ -42,13 +40,12 @@ end
 % Svara på frågor
 
 % b)
-% Vi får P0=(0,0), P1=(205,1002), P2=(458,2458), P3=(641,1750), P4=(1020,0)
 
 % Anonym funktion för den naiva ansatsen
 p = @(c, x) c(1) + c(2)*x + c(3)*x.^2 + c(4)*x.^3 + c(5)*x.^4;
 
-x = [0, 205, 458, 641, 1020]';
-y = [0, 1002, 2458, 1750, 0]';
+x = [0, X{1}(1), X{2}(1), X{3}(1), 1020]';
+y = [0, X{1}(2), X{2}(2), X{3}(2), 0]';
 
 % Matris A
 A = [ones(size(x)) x x.^2 x.^3 x.^4];
@@ -71,4 +68,6 @@ disp("c1 = " + c(2))
 disp("c2 = " + c(3))
 disp("c3 = " + c(4))
 disp("c4 = " + c(5))
+
+% Svara på frågor
 
