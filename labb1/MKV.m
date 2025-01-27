@@ -2,6 +2,8 @@ clear all
 
 load STHLMTEMP
 
+format long
+
 % Constant
 k = 2*pi/365;
 

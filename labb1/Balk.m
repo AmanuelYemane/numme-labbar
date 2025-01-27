@@ -1,5 +1,7 @@
 clear all
 
+format long
+
 % a)
 
 H = 0.5;
