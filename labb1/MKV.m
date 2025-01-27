@@ -87,5 +87,7 @@ grid on
 disp("minstakvadratsumman modell 1 = " + least_squares_sum1);
 disp("minstakvadratsumman modell 2 = " + least_squares_sum2);
 
-% e) 
+% d) Svar på frågor:
+
+% e) Svar på frågor:
 
