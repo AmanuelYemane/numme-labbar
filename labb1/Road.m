@@ -1,4 +1,4 @@
-%format long
+format long
 
 % a)
 
@@ -9,7 +9,7 @@ P = {
     @(X) [(X(1) - 675)^2 + (X(2) - 1730)^2 - 42^2; (X(1) - 656)^2 + (X(2) - 1760)^2 - 57^2]
     };
 
-% Anonyma funktioner för Jakobianen till varje funktion
+% Anonyma funktioner för Jacobianen till varje vektorvärd funktion P(i)
 J = {
     @(X) [2*X(1) - 350, 2*X(2) - 1900; 2*X(1) - 320, 2*X(2) - 2016];
     @(X) [2*X(1) - 820, 2*X(2) - 4800; 2*X(1) - 762, 2*X(2) - 5000];
@@ -18,9 +18,9 @@ J = {
 
 % Startgissningar
 X = {
-    [170;1000]; % P1
-    [400;2450]; % P2
-    [800;1750] % P3
+    [200;1000]; % P1
+    [400;2600]; % P2
+    [670;1780] % P3
     };
 
 tol = 1e-8; hnorm = 1; iter = 0; maxiter = 20;
@@ -37,7 +37,21 @@ for i=1:3
     end
 end
 
-% Svara på frågor
+% Svar på frågor
+%
+% Koordinaterna blir P1≈(205,1002), P2≈(458,2458), P3≈(712,1750).
+% Vi kan veta att Newtons metod konvergerar som den ska eftersom vi har
+% valt startgissningar som bör ligga i närheten av de sökta punkterna
+% (efter uppritning och analys av cirklarna). Vi vet också att Jacobianen 
+% för respektive P måste vara inverterbar för varje n, dvs detJ≠0 i varje
+% iteration, vilket vi på förhand inte kan vara säkra på då det finns
+% värden på X(1) och X(2) som gör att detJ=0. Men i och med att de punkter
+% som metoden konvergerar mot stämmer överens med förväntningarna på de
+% sökta punkterna kan vi anta att detJ≠0 för alla iterationer och att
+% Newtons metod därmed konvergerar som den ska. För att försäkra sig
+% ytterligare kan en kontroll implementeras som i varje iteration kollar
+% att detJ faktiskt är skiljt från 0, men det är inte nödvändigt i det här
+% fallet. Konvergenshastigheten är kvadratisk för varje punkt.
 
 % b)
 
@@ -52,7 +66,7 @@ A = [ones(size(x)) x x.^2 x.^3 x.^4];
 
 c = A\y;
 
-% Get some x values in the interval (0, 1020)
+% Ta fram x-värden i intervallet (0, 1020)
 xvalues = linspace(x(1), x(end), 100);
 
 figure
@@ -69,5 +83,6 @@ disp("c2 = " + c(3))
 disp("c3 = " + c(4))
 disp("c4 = " + c(5))
 
-% Svara på frågor
+% Koefficienterna i polynomet blir:
+% c0 = 0, c1 ≈ -0.58, c2 ≈ 0.04, c3 ≈ -8.1e-05, c4 ≈ 4.0e-08
 

@@ -6,7 +6,7 @@ format long
 
 H = 0.5;
 tol = 1e-8; % Given tolerans
-t = 4.3; % Startgissning t(0)
+t = 4.3; % Startgissning t0
 
 f = @(t) 8*exp(-(t/2))*cos(3*t) - H; % f(t) = 0
 fp = @(t) -4*exp(-(t/2))*cos(3*t) - 24*exp(-(t/2))*sin(3*t);
@@ -15,40 +15,51 @@ difft = 1; iterN = 0; maxiter = 100;
 
 diffN = [];
 
-% Newton's Method
+disp("H=0.5, Netons metod:")
+
+% Newtons metod
 while difft > tol && iterN < maxiter
-    iterN = iterN + 1; % Increase num of iterarions
-    tnew = t-f(t)/fp(t); % Update with Newton's Method
+    iterN = iterN + 1; % Inkrementera antalet iterationer
+    tnew = t-f(t)/fp(t); % Newtons metod
     difft = abs(tnew - t); % |t(n+1)-t(n)|
-    t = tnew; % Assign new t
-    %disp([iterN tnew difft]) % Display
-    diffN = [diffN; difft]; % add difft to the array
+    t = tnew; % Uppdatera t
+    disp([iterN tnew difft]) % Display
+    diffN = [diffN; difft]; % Lägg till difft i arrayen
 end
 
-% Svar på frågor:
+% Svar på frågor
+%
+% Med startvärdet 4.3 krävdes 5 iterationer och svaret blev ~4.5
 
 % b)
 
-% Secant Method
-
-told = 4.6; % t(0)
-t = 4.3; % t(1)
+told = 4.2; % t0
+t = 4.3; % t1
 
 difft = 1; iterS = 0; maxiter = 100;
 
 diffS = []; % Initialize empty array
 
+disp("H=0.5, sekantmetoden:")
+
+% Sekantmetoden
 while difft > tol && iterS < maxiter
-    iterS = iterS + 1; % Increase num of iterarions
-    tnew = t-f(t)*(t - told)/(f(t)-f(told)); % Update with the Secant Method
+    iterS = iterS + 1; % Inkrementera antalet iterationer
+    tnew = t-f(t)*(t - told)/(f(t)-f(told)); % Sekantmetoden
     difft = abs(tnew - t); % |t(n+1)-t(n)|
-    told = t; % Assign new told
-    t = tnew; % Assign new t
-    %disp([iterS tnew difft]) % Display
-    diffS = [diffS; difft]; % add difft to the array
+    told = t; % Uppdatera told
+    t = tnew; % Uppdatera t
+    disp([iterS tnew difft]) % Display
+    diffS = [diffS; difft]; % Lägg till difft i arrayen
 end
 
 % Svar på frågor:
+%
+% Med startvärden t0=4.2 och t1=4.3 krävdes 6 iterationer och resultatet
+% blev ~4.5. Med de valda startvärdena krävde Newtons metod färre
+% iterationer än sekantmetoden. Anledningen till detta är att Newtons metod
+% generellt har en högre konvergenshastighet. Newtons metod konvergerar
+% kvadratiskt medan sekantmetoden konvergerar superlinjärt.
 
 % c)
 
@@ -65,7 +76,7 @@ legend('Newtons metod', 'Sekantmetoden', 'Location', 'Best')
 % d)
 
 H = 2.8464405473;
-t = 2; % Startgissning t(0)
+t = 2.0; % Startgissning t0
 
 f = @(t) 8*exp(-(t/2))*cos(3*t) - H; % f(t) = 0
 
@@ -73,14 +84,16 @@ difft = 1; iterN = 0; maxiter = 100;
 
 diffN = [];
 
-% Newton's Method
+disp("H=2.8464405473, Newtons metod:")
+
+% Newtons metod
 while difft > tol && iterN < maxiter
-    iterN = iterN + 1; % Increase num of iterarions
-    tnew = t-f(t)/fp(t); % Update with Newton's Method
+    iterN = iterN + 1; % Inkrementera antalet iterationer
+    tnew = t-f(t)/fp(t); % Newtons metod
     difft = abs(tnew - t); % |t(n+1)-t(n)|
-    t = tnew; % Assign new t
+    t = tnew; % Uppdatera t
     disp([iterN tnew difft]) % Display
-    diffN = [diffN; difft]; % add difft to the array
+    diffN = [diffN; difft]; % Lägg till difft i arrayen
 end
 
 figure
@@ -92,3 +105,18 @@ grid on
 legend('Newtons metod', 'Location', 'Best')
 
 % Svar på frågor:
+%
+% T≈2.04. Konvergenshastighet är betydligt lägre för detta värde på H, då metoden
+% verkar konvergera linjärt snarare än kvadratiskt. Anledningen till att 
+% metoden beter sig annorlunda för detta värde på H är att funktionen f(t) 
+% har en lokal maximipunkt i det sökta nollstället. På grund av det kommer 
+% både f(t) och f'(t) vara väldigt små i närheten av nollstället vilket 
+% kommer göra att Newtons metod tappar i fart då ökningen i t (-f(t)/f'(t)) 
+% blir väldigt liten. Metoden kommer därför ta väldigt korta steg, vilket kommer 
+% göra att den kräver fler iterationer och konvergerar linjärt snarare än 
+% kvadratiskt. Vad gäller känsligheten för valet av startvärdet skiljer sig 
+% metoden från a) på så sätt att den tål en större felmarginal. 
+% Det beror på att avståndet till övriga nollställen är större för denna
+% funktion samt att avståndet är längre till funktionens närmsta
+% extrempunkt där derivatan kommer ändras drastiskt och göra att metoden
+% konvergerar mot en annan punkt.
