@@ -92,4 +92,9 @@ disp("minstakvadratsumman modell 2 = " + least_squares_sum2);
 % d) Svar på frågor:
 
 % e) Svar på frågor:
+% Runt 1850 sker det en ökning i ökning av dygnsmedeltemperaturen. Det kan
+% vara pågrund av den inustriella relolutionen, som såg en ökning i
+% förbrännelse av folisa bränslen, vilket bidrar till den globala
+% uppvärmningnen. 
+
 
