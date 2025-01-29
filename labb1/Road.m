@@ -6,7 +6,7 @@ format long
 P = {
     @(X) [(X(1) - 175)^2 + (X(2) - 950)^2 - 60^2; (X(1) - 160)^2 + (X(2) - 1008)^2 - 45^2];
     @(X) [(X(1) - 410)^2 + (X(2) - 2400)^2 - 75^2; (X(1) - 381)^2 + (X(2) - 2500)^2 - 88^2];
-    @(X) [(X(1) - 675)^2 + (X(2) - 1730)^2 - 42^2; (X(1) - 656)^2 + (X(2) - 1760)^2 - 57^2]
+    @(X) [(X(1) - 675)^2 + (X(2) - 1730)^2 - 42^2; (X(1) - 656)^2 + (Xk(2) - 1760)^2 - 57^2]
     };
 
 % Anonyma funktioner för Jacobianen till varje vektorvärd funktion P(i)
@@ -30,7 +30,7 @@ for i=1:3
     disp("For P" + i + ":")
     while hnorm > tol && iter < maxiter
         iter = iter + 1;
-        h = -J{i}(X{i})\P{i}(X{i});
+        h = -J{i}(X{i})\P{i}(X{i}); % Newtons metod för system
         X{i} = X{i} + h;
         hnorm = norm(h);
         disp([iter X{i}(1) X{i}(2) hnorm]);

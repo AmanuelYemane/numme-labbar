@@ -8,8 +8,15 @@ H = 0.5;
 tol = 1e-8; % Given tolerans
 t = 4.3; % Startgissning t0
 
-f = @(t) 8*exp(-(t/2))*cos(3*t) - H; % f(t) = 0
-fp = @(t) -4*exp(-(t/2))*cos(3*t) - 24*exp(-(t/2))*sin(3*t);
+f = @(t) 8.*exp(-(t./2)).*cos(3.*t) - H; % f(t) = 0
+fp = @(t) -4.*exp(-(t./2)).*cos(3.*t) - 24.*exp(-(t./2)).*sin(3.*t);
+
+% Plota funktionen för att se nollställen och välja startgissningar
+figure
+tv = linspace(0, 10, 100);
+plot(tv, f(tv), 'r', 'LineWidth', 1.5)
+grid on
+
 
 difft = 1; iterN = 0; maxiter = 100;
 
@@ -38,14 +45,14 @@ t = 4.3; % t1
 
 difft = 1; iterS = 0; maxiter = 100;
 
-diffS = []; % Initialize empty array
+diffS = []; % Initialisera tom array
 
 disp("H=0.5, sekantmetoden:")
 
 % Sekantmetoden
 while difft > tol && iterS < maxiter
     iterS = iterS + 1; % Inkrementera antalet iterationer
-    tnew = t-f(t)*(t - told)/(f(t)-f(told)); % Sekantmetoden
+    tnew = t-f(t)*(t-told)/(f(t)-f(told)); % Sekantmetoden
     difft = abs(tnew - t); % |t(n+1)-t(n)|
     told = t; % Uppdatera told
     t = tnew; % Uppdatera t
@@ -78,7 +85,7 @@ legend('Newtons metod', 'Sekantmetoden', 'Location', 'Best')
 H = 2.8464405473;
 t = 2.0; % Startgissning t0
 
-f = @(t) 8*exp(-(t/2))*cos(3*t) - H; % f(t) = 0
+f = @(t) 8.*exp(-(t./2)).*cos(3.*t) - H; % f(t) = 0
 
 difft = 1; iterN = 0; maxiter = 100;
 
