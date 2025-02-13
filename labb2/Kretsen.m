@@ -12,8 +12,11 @@ q1 = y1(:,1); % Första kolumnen
 i1 = y1(:,2); % Andra kolumnen
 
 figure(1)
-subplot(1,2,1)
+subplot(1, 2, 1)
 plot(t1, q1, '--o', t1, i1, '--or')
+title('Dämpad svägning')
+xlabel('t')
+legend('q', 'i')
 
 [t2, y2] = ode45(@(t, y) myode(t, y, 0, 2, 0.5), tspan, y0);
 
@@ -21,8 +24,11 @@ q2 = y2(:,1); % Första kolumnen
 i2 = y2(:,2); % Andra kolumnen
 
 figure(1)
-subplot(1,2,2)
+subplot(1, 2, 2)
 plot(t2, q2, '--o', t2, i2, '--or')
+title('Odämpad svägning')
+xlabel('t')
+legend('q', 'i')
 
 % d)
 
@@ -43,6 +49,7 @@ function eulerFram(n, myode, place)
         yvalues(:,ii+1) = y;
     end
 
+    % Plotta Euler
     figure(2)
     subplot(2, 2, place)
 
@@ -51,6 +58,7 @@ function eulerFram(n, myode, place)
 
     plot(tvals, q, '--o', tvals, i, '--o')
     hold on;
+
     % Plotta ode45
     y0 = [1; 0];
     [t3, y3] = ode45(@(t, y) myode(t, y, 0, 2, 0.5), intervall, y0);
