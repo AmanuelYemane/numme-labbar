@@ -79,7 +79,7 @@ sgtitle('Numerisk lösning av systemet med framåt Euler på intervallet [0,80] 
 % noggrannhetsordning 1. På samma sätt får vi även noggranhetsordningen för
 % bakåt Euler till 1.
 
-% Vi kan också komam fram till detta värde på p genom att undersöka kvoten 
+% Vi kan också komma fram till detta värde på p genom att undersöka kvoten 
 % e(h)/e(h/2). Kvoten har ungefär värdet 2 för alla testvärden på h.
 % Enligt definitionen av noggranhetesordning är e(h)/e(h/2) ≈ 2^p, därmed
 % är p = 1.
@@ -104,8 +104,7 @@ function eulerBak(n, T, exactSol, place)
     if T == 8
         diff = abs(yvalues(n+1) - exactSol(T));
         figure(4)
-        disp("h = " + h + ", diff = " + diff)
-        plot(h, diff, 'o')
+        loglog(h, diff, 'o')
         hold on
         disp("n = " + n + ": " + diff)
         

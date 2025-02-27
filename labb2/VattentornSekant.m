@@ -33,5 +33,5 @@ while diffBeta > tol && iter < maxiter
     betaOld = beta; % Uppdatera betaOld
     beta = betaNew; % Uppdatera beta
     disp([iter betaNew diffBeta]) % Display
-    diff = [diff; diffBeta]; % Lägg till difft i arrayen
+    diff = [diff; diffBeta]; % Lägg till diffBeta i arrayen
 end
