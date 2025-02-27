@@ -61,14 +61,16 @@ function eulerFram(n, myode, place)
 
     % Plotta ode45
     y0 = [1; 0];
-    [t3, y3] = ode45(@(t, y) myode(t, y, 0, 2, 0.5), intervall, y0);
+    [t3, y3] = ode45(@(t, y) myode(t, y, 1, 2, 0.5), intervall, y0);
 
     q3 = y3(:,1); % Första kolumnen
     i3 = y3(:,2); % Andra kolumnen
 
     figure(2)
     subplot(2, 2, place)
+    title(sprintf('n = %d', n))
     plot(t3, q3, '-', t3, i3, '-')
+    legend('q med Euler fram', 'i med Euler fram', 'q med ode45', 'i med ode45')
     hold on;
 end
 
@@ -76,3 +78,5 @@ eulerFram(40, myode, 1);
 eulerFram(80, myode, 2);
 eulerFram(160, myode, 3);
 eulerFram(320, myode, 4);
+
+% Instabil för n=40, stabil för övriga
